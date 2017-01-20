@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>slack mockup generator</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+  <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
+  <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <div id="square">
+    <div id="leftSquare">
+      <div id="row">
+        <div class="col-lg-8">
+          <h1 class="title"><%= teamname %></h1>
+        </div>
+        <i class="down fa fa-chevron-down" aria-hidden="true"></i>
+        <i class="bell fa fa-bell-o fa-lg" aria-hidden="true"></i>
+      </div>
+      <div id="row">
+        <div id="circle"></div>
+        <h2 id="subtitle"><%= yourname %></h2>
+      </div>
+      <div id="row">
+        <h2 id="channels">CHANNELS<span id="light">(<%= channel_num %>)</span> <i class="add fa fa-plus-circle fa-inverse" aria-hidden="true"></i> </h2>
+      </div>
+
+      <% channels.forEach(function(channel, index){ %>
+      <div id="row">
+        <h2 class="channel channel<%= index+1 %>">
+          #
+          <% if (current_channel === index+1) { %><span id="bold"><% } %>
+          <%= channel %>
+          <% if (current_channel === index+1) { %></span><% } %>
+        </h2>
+      </div>
+      <% }); %>
+
+      <div id="row">
+        <h2 id="messages">DIRECT MESSAGES<span id="light">(<%= dm_num %>)</span> <i class="add-two fa fa-plus-circle fa-inverse"></i> </h2>
+      </div>
+
+      <% dmusers.forEach(function(dmuser, index){ %>
+      <div id="row">
+        <div class="dmcircle circle<%= index+1 %>"></div>
+        <h2 class="dmsub subtitle<%= index+1 %>"><%= dmuser %></h2>
+      </div>
+      <% }); %>
+    </div>
+
+    <!-- <div class="animated bounceInDown" id="header"> -->
+    <div id="header">
+
+      <h2 id="channel-title">
+        #<%= channels[current_channel-1] %>
+      </h2>
+
+      <div id = "icons">
+        <i class="star fa fa-star-o" aria-hidden="true"></i>
+        <h3 id="line"> | </h3>
+        <i class="user fa fa-user-o" aria-hidden="true"></i>
+        <h3 id="line2"> | </h3>
+        <i class="pin fa fa-thumb-tack" aria-hidden="true"></i>
+      </div>
+
+      <div id="rightIcons">
+        <i class="phone fa fa-phone fa-lg" aria-hidden="true"></i>
+        <i class="cog fa fa-cog fa-lg" aria-hidden="true"></i>
+        <i class=" details fa fa-list-alt fa-lg" aria-hidden="true"></i>
+        <h3 id="line3"> | </h3>
+        <i class="search-glass fa fa-search" aria-hidden="true"></i>
+        <input class="search" placeholder="Search" type="text" ></input>
+        <i class="at fa fa-at fa-lg" aria-hidden="true"></i>
+        <i class="star-o fa fa-star-o fa-lg" aria-hidden="true"></i>
+        <i class="menu fa fa-ellipsis-v fa-lg" aria-hidden="true"></i>
+      </div>
+
+      <hr class="bottom-header-line" />
+    </div>
+
+    <div class="message-container">
+    <% comments.forEach(function(user, index) { %>
+    <div class="message area-<%= index+1 %>">
+      <div id="container">
+        <div class="row">
+          <div class="col-xs-6 col-md-3">
+            <a href="#" class="person thumbnail">
+              <img class="person-img" src="<%= user.icon %>">
+            </a>
+          </div>
+        </div>
+      </div>
+      <div id="container">
+        <h4 class="person-name"> <%= user.name %> <span class="time"><%= user.date %></span> </h4>
+        <h5 class="person-text">
+          <%= user.text %>
+        </h5>
+      </div>
+    </div>
+    <% }); %>
+    </div>
+
+    <div id="bottom">
+      <input class="search-bottom" placeholder="Message #<%= channels[current_channel-1] %>" type="text" ></input>
+      <i class="smile fa fa-smile-o" aria-hidden="true"></i>
+      <h3 id="line-bottom"> | </h3>
+      <i class="plus fa fa-plus" aria-hidden="true"></i>
+    </div>
+  </div>
+</body>
+</html>

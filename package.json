@@ -1,0 +1,22 @@
+{
+  "name": "smog-prototype",
+  "version": "0.0.1",
+  "description": "slack mockup generator (prototype)",
+  "main": "index.js",
+  "repository": "https://github.com/knjcode/smog-prototype",
+  "scripts": {
+    "start": "nodemon --watch index.js --watch data.yml",
+    "export": "node export.js"
+  },
+  "author": "knjcode",
+  "license": "MIT",
+  "dependencies": {
+    "ejs": "2.5.5",
+    "express": "4.14.0",
+    "js-yaml": "3.7.0",
+    "nightmare": "2.9.1",
+    "nodemon": "1.11.0",
+    "request": "2.79.0",
+    "request-promise": "4.1.1"
+  }
+}
