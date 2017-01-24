@@ -12,6 +12,7 @@
   "license": "MIT",
   "dependencies": {
     "ejs": "2.5.5",
+    "emojione": "2.2.7",
     "express": "4.14.0",
     "js-yaml": "3.7.0",
     "nightmare": "2.9.1",

@@ -1,6 +1,7 @@
 const fs = require('fs')
 const yaml = require('js-yaml')
 const express = require('express')
+const emojione = require('emojione')
 const Nightmare = require('nightmare')
 const nightmare = Nightmare({ width:800, height:675 })
 
@@ -28,7 +29,7 @@ const data = yaml.safeLoad(fs.readFileSync('./data.yml', 'utf8'))
 try {
   const usersList = require('./userslist.json')
   console.log('Auto loading user icons...')
-  data.messages.forEach(function(user){
+  data.messages.forEach((user) => {
     if(!user.icon) {
       user.icon = usersList.members.filter((u) => {
         return u.name == user.name
@@ -37,9 +38,38 @@ try {
   })
 }
 catch(err) {
-  console.log(err)
-  console.log('Slack user not found or userslist.json does not exists')
+  console.error(err)
+  console.error('Slack user not found or userslist.json does not exists')
   process.exit(1)
+}
+
+try {
+  const emojiList = require('./emojilist.json')
+  console.log('Auto loading emoji...')
+  data.messages.forEach((user) => {
+    user.text = emojione.shortnameToUnicode(user.text)
+    emojis = user.text.match(/:.*?:/g)
+    if (emojis){
+      emojis.forEach((emoji) => {
+        name = emoji.slice(1,-1)
+        if (emojiList.emoji[name]) {
+          emojiUrl = emojiList.emoji[name]
+          if (user.text == emoji) {
+            // emoji-only
+            emojiTag = `<span class="emoji emoji-sizer emoji-only" style="background-image:url(${emojiUrl})" title="${name}">${emoji}</span>`
+          } else {
+            // not emoji-only
+            emojiTag = `<span class="emoji emoji-sizer" style="background-image:url(${emojiUrl})" title="${name}">${emoji}</span>`
+          }
+          user.text = user.text.replace(emoji, emojiTag)
+        }
+      })
+    }
+  })
+}
+catch(err) {
+  console.error(err)
+  console.error('emojilist.json does not exists')
 }
 
 console.log(data)

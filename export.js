@@ -11,6 +11,7 @@ if (!token) {
 }
 
 var usersListUrl = 'https://slack.com/api/users.list?token=' + token;
+var emojiListUrl = 'https://slack.com/api/emoji.list?token=' + token;
 
 function saveAsFile(data, dest) {
   return new Promise((resolve, reject) => {
@@ -25,10 +26,12 @@ function saveAsFile(data, dest) {
   });
 }
 
-rp(usersListUrl).then((value) => {
-  var usersList = JSON.parse(value);
-  if ( usersList.ok ) {
-    return saveAsFile(value, 'userslist.json')
+Promise.all([rp(usersListUrl), rp(emojiListUrl)])
+.then((values) => {
+  var usersList = JSON.parse(values[0]);
+  var emojiList = JSON.parse(values[1]);
+  if ( usersList.ok && emojiList.ok ) {
+    return Promise.all([saveAsFile(values[0], 'userslist.json'), saveAsFile(values[1], 'emojilist.json')])
   } else {
     return Promise.reject('Error: Slack API request failed. Check your slack test token.');
   }

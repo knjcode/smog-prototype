@@ -494,6 +494,32 @@ body {
   color: #2C2D30;
 }
 
+.emoji {
+  color: transparent!important;
+  text-indent: 100%;
+  text-shadow: none;
+  display: inline-block;
+  overflow: hidden;
+  width: 1.3em;
+  height: 1.3em;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  text-align: left;
+}
+
+.emoji-sizer {
+  line-height: 1.2rem;
+  font-size: 1.5rem;
+  vertical-align: middle;
+  margin-top: -2px;
+}
+
+.emoji-only {
+  line-height: 2rem;
+  font-size: 2rem;
+}
+
 #line-bottom {
   position: absolute;
   display: block;
