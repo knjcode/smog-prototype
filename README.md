@@ -20,7 +20,7 @@ dmusers:
   - andrew (you)
   - dave
   - steve
-comments:
+messages:
   - name: andrew
     date: 11:57 AM
     text: foo
