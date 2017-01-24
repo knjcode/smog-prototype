@@ -27,8 +27,8 @@ const data = yaml.safeLoad(fs.readFileSync('./data.yml', 'utf8'))
 
 try {
   const usersList = require('./userslist.json')
-  console.log('auto load user icons')
-  data.comments.forEach(function(user){
+  console.log('Auto loading user icons...')
+  data.messages.forEach(function(user){
     if(!user.icon) {
       user.icon = usersList.members.filter((u) => {
         return u.name == user.name
@@ -37,7 +37,9 @@ try {
   })
 }
 catch(err) {
-  console.log('userslist.json does not exists')
+  console.log(err)
+  console.log('Slack user not found or userslist.json does not exists')
+  process.exit(1)
 }
 
 console.log(data)
