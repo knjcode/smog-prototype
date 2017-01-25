@@ -51,8 +51,7 @@ try {
   const emojiList = require('./emojilist.json')
   console.log('Auto loading emoji...')
   data.messages.forEach((user) => {
-    user.text = emojione.shortnameToUnicode(user.text)
-    emojis = user.text.match(/:.*?:/g)
+    emojis = user.text.match(/:[0-9a-z-_]+?:/g)
     if (emojis){
       emojis.forEach((emoji) => {
         name = emoji.slice(1,-1)
@@ -69,6 +68,11 @@ try {
             emojiTag = `<span class="emoji emoji-sizer" style="background-image:url(${emojiUrl})" title="${name}">${emoji}</span>`
           }
           user.text = user.text.replace(emoji, emojiTag)
+        } else if (emojione.shortnameToUnicode(emoji)) {
+          emojiUnicode = emojione.shortnameToUnicode(emoji)
+          user.text = user.text.replace(emoji, emojiUnicode)
+        } else {
+          console.error('emoji not found: ' + emoji)
         }
       })
     }
