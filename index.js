@@ -54,6 +54,9 @@ try {
         name = emoji.slice(1,-1)
         if (emojiList.emoji[name]) {
           emojiUrl = emojiList.emoji[name]
+          while (emojiUrl.indexOf('alias:') == 0) {
+            emojiUrl = emojiList.emoji[emojiUrl.slice(6)]
+          }
           if (user.text == emoji) {
             // emoji-only
             emojiTag = `<span class="emoji emoji-sizer emoji-only" style="background-image:url(${emojiUrl})" title="${name}">${emoji}</span>`
