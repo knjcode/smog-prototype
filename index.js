@@ -17,6 +17,10 @@ function capture() {
     })
   .then(()=>{
     console.log('Screenshot saved!')
+    start = '\u001b]1337;File=inline=1:'
+    image = fs.readFileSync('slackmock.png')
+    end = '\u0007'
+    console.log(start + image.toString('base64') + end)
   })
   .catch((err)=>{
     console.log(err)
