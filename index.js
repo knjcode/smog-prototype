@@ -51,7 +51,7 @@ try {
   const emojiList = require('./emojilist.json')
   console.log('Auto loading emoji...')
   data.messages.forEach((user) => {
-    emojis = user.text.match(/:[0-9a-z-_]+?:/g)
+    emojis = user.text.match(/:[0-9a-z-_+]+?:/g)
     if (emojis){
       emojis.forEach((emoji) => {
         name = emoji.slice(1,-1)
