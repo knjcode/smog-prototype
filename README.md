@@ -1,10 +1,12 @@
 # smog-prototype - slack mock generator (prototype)
 
-メンバ名や発言を定義したyamlファイルからslack風の画像を生成します
+Generates Slack-like image file from yaml conifg that defines members' name
+and their messages.  This is really useful for documentation using screenshots
+of Slack .
 
 ![mock image sample](samplemock.png)
 
-上記の画像を下記のyamlファイルを定義するだけで作成できます
+This image is generated from the following simple yaml.
 
 ```
 teamname: yourteam
@@ -35,44 +37,46 @@ messages:
     icon: https://randomuser.me/api/portraits/men/91.jpg
 ```
 
-また、事前にslackteamのユーザ情報をエクスポートしておくことで、ユーザ定義絵文字の表示および各ユーザのアイコン画像URLの指定が不要になります
+You don't need to sepcify user defined emoji and users' icon when you export
+users' information from your slack team (described bellow).
 
-## 使い方
+## Usage
 
-__パッケージのインストール__
+__Installation{__
 
 ```
 $ npm install
 ```
 
-__slackユーザ情報のエクスポート (任意)__
+__Export users' information (if you prefer)__
 
-事前にslackteamのユーザ情報をエクスポートしておくことで、ユーザ定義絵文字の表示および各ユーザのアイコン画像URLの指定が不要になります
+You don't need to sepcify user defined emoji and users' icon when you export
+users' information from your slack team.
 
 ```
 $ export token="your-slack-test-token"
 $ npm run export
 ```
 
-slackのテストトークンはここから取得できます [https://api.slack.com/docs/oauth-test-tokens](https://api.slack.com/docs/oauth-test-tokens)
+You can get your Slack test token from here [https://api.slack.com/docs/oauth-test-tokens](https://api.slack.com/docs/oauth-test-tokens)
 
-__yamlファイルの準備__
+__Prepare yaml__
 
-`data.yml` をお好みで編集します
+Edit `data.yml` as you like.
 
-__ローカルサーバの起動とキャプチャの取得__
+__Bring up your local server and capture the screenshot__
 
 ```
 $ npm start
 ```
 
-ローカルサーバ ([http://localhost:3000](http://localhost:3000)) を起動してモック画面のキャプチャを取得します。
+This starts a local server ([http://localhost:3000](http://localhost:3000)) and then capture the screenshot from its mock screen.
 
-キャプチャした画像は `slackmock.png` という名前で保存されます
+The taken screenshot is saved as `slackmock.png`
 
-`data.yml` を編集すると、自動で画面キャプチャを取得しなおします
+Re-capture automatically when you edit the `data.yml`
 
-## 参考
+## Acknowledgements
 
-- slack風画面は [Slack Chat CSS | #codevember](https://codepen.io/mikemang/pen/YpNYWV) を参考に作成しました
-- サンプルのユーザアイコンには [RANDOM USER GENERATOR](https://randomuser.me/) の画像を利用しています
+- Slack-like screens are from [Slack Chat CSS | #codevember](https://codepen.io/mikemang/pen/YpNYWV)
+- Users' icon in this document from [RANDOM USER GENERATOR](https://randomuser.me/)
