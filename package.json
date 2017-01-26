@@ -5,7 +5,7 @@
   "main": "index.js",
   "repository": "https://github.com/knjcode/smog-prototype",
   "scripts": {
-    "start": "nodemon --watch index.js --watch data.yml",
+    "start": "nodemon --watch index.js --watch data.yml --watch public/css/style.css",
     "export": "node export.js"
   },
   "author": "knjcode",

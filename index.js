@@ -52,7 +52,11 @@ try {
   console.log('Auto loading emoji...')
   data.messages.forEach((user) => {
     emojis = user.text.match(/:[0-9a-z-_+]+?:/g)
+    emojiOnly = false
     if (emojis){
+      if (emojis.join('') == user.text) {
+        emojiOnly = true
+      }
       emojis.forEach((emoji) => {
         name = emoji.slice(1,-1)
         if (emojiList.emoji[name]) {
@@ -60,17 +64,20 @@ try {
           while (emojiUrl.indexOf('alias:') == 0) {
             emojiUrl = emojiList.emoji[emojiUrl.slice(6)]
           }
-          if (user.text == emoji) {
-            // emoji-only
+          if (emojiOnly) {
             emojiTag = `<span class="emoji emoji-sizer emoji-only" style="background-image:url(${emojiUrl})" title="${name}">${emoji}</span>`
           } else {
-            // not emoji-only
             emojiTag = `<span class="emoji emoji-sizer" style="background-image:url(${emojiUrl})" title="${name}">${emoji}</span>`
           }
           user.text = user.text.replace(emoji, emojiTag)
         } else if (emojione.shortnameToUnicode(emoji)) {
           emojiUnicode = emojione.shortnameToUnicode(emoji)
-          user.text = user.text.replace(emoji, emojiUnicode)
+          if (emojiOnly) {
+            emojiTag = `<span class="unicode-emoji unicode-emoji-sizer unicode-emoji-only" title="${name}">${emojiUnicode}</span>`
+          } else {
+            emojiTag = `<span class="unicode-emoji unicode-emoji-sizer" title="${name}">${emojiUnicode}</span>`
+          }
+          user.text = user.text.replace(emoji, emojiTag)
         } else {
           console.error('emoji not found: ' + emoji)
         }
