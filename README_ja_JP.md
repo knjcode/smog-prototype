@@ -1,4 +1,4 @@
-# smog-prototype - slack mock generator (prototype)
+# smog-prototype (slack mock generator)
 
 メンバ名や発言を定義したyamlファイルからslack風の画像を生成します
 

@@ -1,4 +1,4 @@
-# smog-prototype - slack mock generator (prototype)
+# smog-prototype (slack mock generator)
 
 Generates Slack-like image file from yaml conifg that defines members' name
 and their messages.  This is really useful for documentation using screenshots
@@ -42,7 +42,7 @@ users' information from your slack team (described bellow).
 
 ## Usage
 
-__Installation{__
+__Installation__
 
 ```
 $ npm install
